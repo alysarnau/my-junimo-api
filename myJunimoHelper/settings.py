@@ -29,6 +29,8 @@ if os.getenv('ENV') == 'development':
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': DB_NAME,
     }
+    DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+
     # Set debug to true
     DEBUG = True
     # Only allow locally running client at port 3000 for COR
@@ -38,6 +40,8 @@ else:
     # to locate the database based on Heroku setup
     #### added 10.35
     DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+    DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+
     #####
     DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
     # Set debug to false
