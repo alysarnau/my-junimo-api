@@ -37,6 +37,7 @@ else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
     DB = dj_database_url.config()
+    print(DB)
     # Set debug to false
     DEBUG = False
     # Only allow the `CLIENT_ORIGIN` for CORS
