@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import sys
 import dj_database_url
+from sqlalchemy import create_engine
 
 # .env config:
 from dotenv import load_dotenv, find_dotenv
@@ -34,7 +35,15 @@ if os.getenv('ENV') == 'development':
 else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
-    DB = dj_database_url.config()
+    db_from_env = dj_database_url.config(default=DATABASES['default'], conn_max_age=500, ssl_require=True)
+    DATABASES['default'].update(db_from_env)
+    db_engine = DATABASES['default']['ENGINE']
+    db_name = DATABASES['default']['NAME']
+    db_user = DATABASES['default']['USER']
+    db_password = DATABASES['default']['PASSWORD']
+    db_host = DATABASES['default']['HOST']
+    db_port = DATABASES['default']['PORT']
+    ENGINE = create_engine("postgresql+psycopg2://"+db_user+":"+db_password+"@"+db_host+":"+str(db_port)+"/"+db_name)
     # Set debug to false
     DEBUG = False
     # Only allow the `CLIENT_ORIGIN` for CORS
