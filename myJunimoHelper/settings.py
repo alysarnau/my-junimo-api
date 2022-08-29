@@ -37,7 +37,7 @@ else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
     #### added 10.35
-    DATABASES = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
+    DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
     #####
     DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
     # Set debug to false
