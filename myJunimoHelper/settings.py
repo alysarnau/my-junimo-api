@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 import sys
 import dj_database_url
+from sqlalchemy import create_engine
 
 # .env config:
 from dotenv import load_dotenv, find_dotenv
@@ -21,42 +22,66 @@ load_dotenv(find_dotenv())
 DB_URL = "postgres://vcqbkkooutgfqd:65163af1098f1b4a767d3b4578338ed47c0048e1242c577c63dbb0a1fba2c3c3@ec2-44-193-178-122.compute-1.amazonaws.com:5432/d6jhksajdp4p5n"
 
 # Determine if we are on local or production
-if os.getenv('ENV') == 'development':
-    # If we are on development, use the `DB_NAME_DEV` value
-    # from the .env file as the database name
-    DB_NAME = os.getenv('DB_NAME_DEV')
-    DB = {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-    }
-    DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+# Hiding this to try non-formulaic
+# if os.getenv('ENV') == 'development':
+#     # If we are on development, use the `DB_NAME_DEV` value
+#     # from the .env file as the database name
+#     DB_NAME = os.getenv('DB_NAME_DEV')
+#     DB = {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': DB_NAME,
+#     }
+#     DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
 
-    # Set debug to true
-    DEBUG = True
-    # Only allow locally running client at port 3000 for COR
-    CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
-else:
-    # If we are on production, use the dj_database_url package
-    # to locate the database based on Heroku setup
-    #### added 10.35
-    DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
-    DATABASES['default']['ENGINE'] = 'django_postgrespool'
-    #####
-    DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
-    # Set debug to false
-    DEBUG = False
-    # Only allow the `CLIENT_ORIGIN` for CORS
-    CORS_ORIGIN_WHITELIST = [
-        os.getenv('CLIENT_ORIGIN')
-    ]
+#     # Set debug to true
+#     DEBUG = True
+#     # Only allow locally running client at port 3000 for COR
+#     CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+# else:
+#     # If we are on production, use the dj_database_url package
+#     # to locate the database based on Heroku setup
+#     #### added 10.35
+#     DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+#     DATABASES['default']['ENGINE'] = 'django_postgrespool'
+#     #####
+#     DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
+#     # Set debug to false
+#     DEBUG = False
+#     # Only allow the `CLIENT_ORIGIN` for CORS
+#     CORS_ORIGIN_WHITELIST = [
+#         os.getenv('CLIENT_ORIGIN')
+#     ]
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 # Default database as defined above depending on development
 # or production environment
+# DATABASES = {
+#     'default': DB
+# }
+
+
+
 DATABASES = {
-    'default': DB
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'myproject',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
 }
+
+
+db_from_env = dj_database_url.config(default=DATABASES['default'], conn_max_age=500, ssl_require=True)
+db_engine = DATABASES['default']['ENGINE']
+db_name = DATABASES['default']['NAME']
+db_user = DATABASES['default']['USER']
+db_password = DATABASES['default']['PASSWORD']
+db_host = DATABASES['default']['HOST']
+db_port = DATABASES['default']['PORT']
+ENGINE = create_engine("postgresql+psycopg2://"+db_user+":"+db_password+"@"+db_host+":"+str(db_port)+"/"+db_name)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -87,6 +112,7 @@ INSTALLED_APPS = [
     'corsheaders',
     # for importing spreadsheet
     'django_extensions',
+    'sqlalchemy',
 ]
 
 MIDDLEWARE = [
