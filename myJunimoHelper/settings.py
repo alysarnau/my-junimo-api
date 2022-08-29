@@ -41,6 +41,7 @@ else:
     # Only allow the `CLIENT_ORIGIN` for CORS
     CORS_ORIGIN_WHITELIST = [
         # works best when you put something in the config vars in heroku
+        # trying this without path
         os.getenv('CLIENT_ORIGIN')
     ]
 
