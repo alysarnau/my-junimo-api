@@ -10,8 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
-# placeholder commit
-
 import os
 import sys
 import dj_database_url
@@ -19,6 +17,8 @@ import dj_database_url
 # .env config:
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
+
+DB_URL = "postgres://vcqbkkooutgfqd:65163af1098f1b4a767d3b4578338ed47c0048e1242c577c63dbb0a1fba2c3c3@ec2-44-193-178-122.compute-1.amazonaws.com:5432/d6jhksajdp4p5n"
 
 # Determine if we are on local or production
 if os.getenv('ENV') == 'development':
