@@ -20,6 +20,8 @@ import dj_database_url
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 
+DATABASE_URL = "postgres://vcqbkkooutgfqd:65163af1098f1b4a767d3b4578338ed47c0048e1242c577c63dbb0a1fba2c3c3@ec2-44-193-178-122.compute-1.amazonaws.com:5432/d6jhksajdp4p5n"
+
 # Determine if we are on local or production
 if os.getenv('ENV') == 'development':
     # If we are on development, use the `DB_NAME_DEV` value
@@ -29,7 +31,8 @@ if os.getenv('ENV') == 'development':
     #     'ENGINE': 'django.db.backends.postgresql',
     #     'NAME': DB_NAME,
     # }
-    DB = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+    DB = {'default': dj_database_url.config(default='postgres://vcqbkkooutgfqd:65163af1098f1b4a767d3b4578338ed47c0048e1242c577c63dbb0a1fba2c3c3@ec2-44-193-178-122.compute-1.amazonaws.com:5432/d6jhksajdp4p5n')}
+    DATABASES = {'default': dj_database_url.config(default='postgres://vcqbkkooutgfqd:65163af1098f1b4a767d3b4578338ed47c0048e1242c577c63dbb0a1fba2c3c3@ec2-44-193-178-122.compute-1.amazonaws.com:5432/d6jhksajdp4p5n')}
 
     # Set debug to true
     DEBUG = True
@@ -39,8 +42,8 @@ else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
     #### added 10.35
-    # DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
-    DB = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+    DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+    DB = {'default': dj_database_url.config(default='postgres://vcqbkkooutgfqd:65163af1098f1b4a767d3b4578338ed47c0048e1242c577c63dbb0a1fba2c3c3@ec2-44-193-178-122.compute-1.amazonaws.com:5432/d6jhksajdp4p5n')}
 
     #####
     # DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
