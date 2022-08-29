@@ -25,11 +25,11 @@ if os.getenv('ENV') == 'development':
     # If we are on development, use the `DB_NAME_DEV` value
     # from the .env file as the database name
     DB_NAME = os.getenv('DB_NAME_DEV')
-    DB = {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DB_NAME,
-    }
-    DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+    # DB = {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': DB_NAME,
+    # }
+    DB = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
 
     # Set debug to true
     DEBUG = True
@@ -39,11 +39,11 @@ else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
     #### added 10.35
-    DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
-    DATABASES = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
+    # DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+    DB = {'default': dj_database_url.config(default='postgres://user:pass@localhost/dbname')}
 
     #####
-    DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
+    # DB = {'default': dj_database_url.parse('postgres://...', conn_max_age=600)}
     # Set debug to false
     DEBUG = False
     # Only allow the `CLIENT_ORIGIN` for CORS
