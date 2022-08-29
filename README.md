@@ -116,3 +116,6 @@ We have provided seed data for all materials and blueprints, as well as provided
 * In the terminal, run ```python manage.py runscript load_blueprints```. This will seed the database with blueprints!
 * <strong>PROVIDED THAT YOU HAVE ONLY RUN THE SEEDED FILES ONCE RESPECTIVELY AND ARE DEALING WITH A "CLEAN" DATABASE...</strong> (that is, a database where the IDs for materials and blueprints start at "1".)
 * In the terminal, run ```python manage.py runscript blueprint_materials```. This will seed the database with the information that connects the materials and blueprints with their amount needed!
+
+# Technology Used
+* We used a Django RESTful backend combined with a Postgres database to handle the data, and a React front end.
