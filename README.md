@@ -7,11 +7,11 @@ Finally, an app that makes resource and crafting management easy in Stardew Vall
 Django/SQL Backend (Python)
 React Frontend
 
-# Link to Client Side
+# Link to Client Side Repo
 https://github.com/alysvolatile/my-Junimo-Client
 
 # Front End Deployed:
-https://github.com/nickesparza/my-Junimo-Client
+https://my-junimo-helper.herokuapp.com/ 
 
 # Back End Deployed: 
 https://my-junimo-api.herokuapp.com/
