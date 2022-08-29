@@ -34,7 +34,10 @@ if os.getenv('ENV') == 'development':
 else:
     # If we are on production, use the dj_database_url package
     # to locate the database based on Heroku setup
-    DB = dj_database_url.config()
+    #### added 10.35
+    DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+    #####
+    DB = {'default': dj_database_url.config(conn_max_age=600)}
     # Set debug to false
     DEBUG = False
     # Only allow the `CLIENT_ORIGIN` for CORS
