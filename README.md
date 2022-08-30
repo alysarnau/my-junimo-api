@@ -80,25 +80,34 @@ Nick Esparza, Alys Cooper
 
 | Verb   | URI Pattern            | Controller#Action |
 |--------|------------------------|-------------------|
-| GET    | `/view-all-characters` | `characters#view-all`   |
-| GET    | `/view-character`        | `characters#view`   |
-| POST   | `/create-character`      | `characters#create`    |
-| PATCH  | `/edit-character/`       | `characters#edit`  |
-| DELETE | `/delete-character/`     | `characters#delete`   |
+| GET    | `/characters` | `characters#view-all`   |
+| GET    | `/character/id`        | `characters#view`   |
+| POST   | `/characters`      | `characters#create`    |
+| PATCH  | `/character/id`        | `characters#edit`  |
+| DELETE | `/character/id`     | `characters#delete`   |
 
 ### MATERIAL route table
 
 | Verb   | URI Pattern            | Controller#Action |
 |--------|------------------------|-------------------|
-| GET    | `/view-material`        | `materials#view`   |
-| GET    | `/view-all-materials`        | `materials#view-all`   |
+| GET    | `/materials/id`        | `materials#view`   |
+| GET    | `/materials`        | `materials#view-all`   |
 
-### CRAFTING RECIPE route table
+### BLUEPRINT/RECIPE route table
 
 | Verb   | URI Pattern            | Controller#Action |
 |--------|------------------------|-------------------|
-| GET    | `/view-crafting-recipes`        | `crafting-recipes#view`   |
-| GET    | `/view-all-crafting-recipes`        | `crafting-recipes#view-all`   |
+| GET    | `/recipe-materials/id`        | `crafting-recipes#view`   |
+| GET    | `/recipe-materials/show/id`        | `crafting-recipes#view-all`   |
+
+### INVENTORY route table
+
+| Verb   | URI Pattern            | Controller#Action |
+|--------|------------------------|-------------------|
+| GET    | `/inventory/charId`        | `inventory#view`   |
+| GET    | `/inventory/charId/invId`        | `inventory#view-one`   |
+| PATCH    | `/inventory/eidtcharId/invId`        | `inventory#edit-one`   |
+
 
 ### STRETCH GOAL - CONSTRUCTION BLUEPRINT route table
 
